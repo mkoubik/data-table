@@ -92,6 +92,7 @@ class DataTable extends Control
         $this->page = $this->paginator->getPage();
         
         $this->dataset->setLimit($this->paginator->length, $this->paginator->offset);
+        // TODO: IDataSource::setOrderBy() is optional
         if (empty($this->orderColumn) && !empty($this->defaultOrderColumn)) {
             $this->dataset->setOrderBy($this->defaultOrderColumn, $this->defaultOrderDir === self::ASC);
         } elseif (!empty($this->orderColumn)) {
