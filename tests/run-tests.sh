@@ -14,6 +14,7 @@ if [ ! -f "$runnerScript" ]; then
 	exit 2
 fi
 
+cd $dir
 php "$runnerScript" -j 20 "$@"
 error=$?
 
