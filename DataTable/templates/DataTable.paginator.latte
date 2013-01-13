@@ -1,0 +1,24 @@
+<div class="pagination" n:if="$paginator->pageCount > 1">
+  <ul>
+    <li n:class="prev, $paginator->first ? disabled">
+        <a class="ajax" n:href="setPage! page => $paginator->page - 1">
+            &lt;&lt;
+        </a>
+    </li>
+    {foreach $steps as $step}
+    <li n:class="$step == $paginator->page ? active">
+        <a class="ajax" n:href="setPage! page => $step">{$step}</a>
+    </li>
+    {if $iterator->nextValue > $step + 1}
+    <li class="disabled">
+        <a class="ajax" n:href="this">…</a>
+    </li>
+    {/if}
+    {/foreach}
+    <li n:class="next, $paginator->last ? disabled">
+        <a class="ajax" n:href="setPage! page => $paginator->page + 1">
+            &gt;&gt;
+        </a>
+    </li>
+  </ul>
+</div>

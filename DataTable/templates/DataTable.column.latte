@@ -1,0 +1,17 @@
+{if $name !== null}
+    {if $orderColumn == $name}
+        {if $orderDir === 'asc'}
+            <th class="sorting_asc"><span class="icon-chevron-down"></span><a class="ajax" n:href="orderBy! $name, false">{$title}</a></th>
+        {else}
+            <th class="sorting_desc"><span class="icon-chevron-up"></span><a class="ajax" n:href="cancelOrderBy!">{$title}</a></th>
+        {/if}
+    {else}
+        <th class="sorting">
+            <a class="ajax" n:href="orderBy! $name, true">{$title}</a>
+            <a n:href="orderBy! $name, true" class="hidden"><span class="icon-chevron-down"></span></a>
+            <a n:href="orderBy! $name, false" class="hidden"><span class="icon-chevron-up"></span></a>
+        </th>
+    {/if}
+{else}
+    <th>{$title}</th>
+{/if}

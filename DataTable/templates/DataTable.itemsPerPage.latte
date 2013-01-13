@@ -1,0 +1,8 @@
+<div class="btn-toolbar pull-right">
+	<div class="btn-group" n:inner-foreach="$options as $option">
+		<a n:href="setItemsPerPage! $option" n:class="ajax, btn, $option == $itemsPerPage ? active">{$option}</a>
+	</div>
+	<div class="btn-group">
+		<p>records per page</p>
+	</div>
+</div>
