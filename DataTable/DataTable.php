@@ -24,6 +24,8 @@ class DataTable extends Control
     /** @persistent */
     public $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE;
 
+    public $templates = array();
+
     /** @var \App\Model\DataSets\IDataSet */
     private $dataset;
     
@@ -38,11 +40,17 @@ class DataTable extends Control
 
     private $defaultOrderDir = self::ASC;
 
-    function __construct($dataset)
+    public function __construct($dataset)
     {
         parent::__construct();
         $this->dataset = $dataset;
         $this->paginator = new \Nette\Utils\Paginator();
+        $this->setupDefaultTemplates();
+    }
+
+    private function setupDefaultTemplates()
+    {
+        $this->templates['column'] = __DIR__ . '/templates/DataTable.column.latte';
     }
     
     public function handleOrderBy($column, $asc = true)
@@ -137,7 +145,7 @@ class DataTable extends Control
         $this->template->orderColumn = $this->orderColumn;
         $this->template->orderDir = $this->orderDir;
 
-        $this->template->setFile(__DIR__ . '/DataTable.column.latte');
+        $this->template->setFile($this->templates['column']);
         $this->template->render();
     }
 
