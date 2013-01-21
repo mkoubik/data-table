@@ -61,6 +61,9 @@ class DataTable extends Control
     private function setupDefaultTemplates()
     {
         $this->templates['column'] = __DIR__ . '/templates/DataTable.column.latte';
+        $this->templates['info'] = __DIR__ . '/templates/DataTable.info.latte';
+        $this->templates['itemsPerPage'] = __DIR__ . '/templates/DataTable.itemsPerPage.latte';
+        $this->templates['paginator'] = __DIR__ . '/templates/DataTable.paginator.latte';
     }
     
     public function handleOrderBy($column, $asc = true)
@@ -145,7 +148,7 @@ class DataTable extends Control
         $this->template->steps = $steps;
         $this->template->paginator = $this->paginator;
         
-        $this->template->setFile(__DIR__ . '/DataTable.paginator.latte');
+        $this->template->setFile($this->templates['paginator']);
         $this->template->render();
     }
     
@@ -165,7 +168,7 @@ class DataTable extends Control
         $this->template->itemsPerPage = $this->itemsPerPage;
         $this->template->options = $options ?: $this->itemsPerPageOptions;
 
-        $this->template->setFile(__DIR__ . '/DataTable.itemsPerPage.latte');
+        $this->template->setFile($this->templates['itemsPerPage']);
         $this->template->render();
     }
 
@@ -173,7 +176,7 @@ class DataTable extends Control
     {
         $this->template->paginator = $this->paginator;
 
-        $this->template->setFile(__DIR__ . '/DataTable.info.latte');
+        $this->template->setFile($this->templates['info']);
         $this->template->render();
     }
     
