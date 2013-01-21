@@ -40,9 +40,19 @@ class DataTable extends Control
 
     private $defaultOrderDir = self::ASC;
 
+    /**
+     * @param \DataTable\DataSets\IDataSet|\Nette\Database\Table\Selection $dataset
+     * @throws \Nette\InvalidArgumentException
+     */
     public function __construct($dataset)
     {
         parent::__construct();
+        if ($dataset instanceof \Nette\Database\Table\Selection) {
+            $dataset = new DataSets\DatabaseSelectionDataSet($dataset);
+        }
+        if (!$dataset instanceof DataSets\IDataSet) {
+            throw new \Nette\InvalidArgumentException('Parameter $dataset must be an instance of \DataTable\DataSets\IDataSet or \Nette\Database\Table\Selection');
+        }
         $this->dataset = $dataset;
         $this->paginator = new \Nette\Utils\Paginator();
         $this->setupDefaultTemplates();
